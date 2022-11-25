@@ -1,8 +1,7 @@
 pipeline {
 	agent {
-		docker {
+		dockerfile {
 			label 'docker'
-			image 'python:3'
 		}
 	}
 	stages {
@@ -24,11 +23,12 @@ pipeline {
 				'''
 			}
 		}
-		post {
-			always {
-				junit 'junit.xml'
-				cobertura coberturaReportFile: 'coverage.xml'
-			}
+	}
+	post {
+		always {
+			junit 'junit.xml'
+			cobertura coberturaReportFile: 'coverage.xml'
 		}
 	}
 }
+
