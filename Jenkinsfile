@@ -3,8 +3,17 @@ pipeline {
         dockerfile {
             label 'docker'
         }
+
+        parameters {
+            string(name: 'REF', defaultValue:
+	'\${ghprbActualCommit}', description: 'Commit to build')
     }
     stages {
+	stage('Hello GitHub') {
+		steps {
+			echo "Hello GitHub!"
+		}
+	}
         stage('Compile') {
             steps {
                 sh 'python3 -m compileall adder.py'
